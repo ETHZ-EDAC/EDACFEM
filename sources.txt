@@ -1,0 +1,8 @@
+The following elements of the code in the toolkit are implemented based on:
+
+
+Equilibrium Matrix for Truss:
+Zhang, Jing Yao Zhang & Ohsaki, Makoto (2015). Equilibrium. In M. Wakayama (Ed.), Tensegrity Structures. Springer Tokyo. https://doi.org/10.1007/978-4-431-54813-3
+
+Timoshenko Beam:
+Panzer, H., Hubele, J., Eid, R., & Lohmann, B. (2009). Generating a parametric finite element model of a 3d cantilever timoshenko beam using matlab. Lehrstuhl für Regelungstechnik.

@@ -1,0 +1,7 @@
+% Problem Specific Settings and Constraints
+
+selfweight,0
+A0,pi
+g,0,0,-9.81e6  
+shape,circle
+buckling,0

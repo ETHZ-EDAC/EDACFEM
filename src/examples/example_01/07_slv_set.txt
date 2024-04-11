@@ -1,0 +1,5 @@
+% Solver specific settings
+
+elemType,truss
+elemSubtype,linear
+

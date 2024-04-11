@@ -1,0 +1,6 @@
+% Material table
+% either on entry for all members or as many entries as members
+% [N mm s kg]
+
+E	Smax	rho
+1000	700	1.2e-9
