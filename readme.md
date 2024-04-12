@@ -1,14 +1,14 @@
 # EDACFEM
 
-#### Short Description
+## Short Description
 
 Toolkit for MATLAB-based FEM calculations developed by the Engineering Design and Computing Laboratory (EDAC) at ETH Zurich.
 
-#### Introduction
+## Introduction
 
 This work provides a linear truss and beam FE simulation environment written in MATLAB. The simulation environment supports linear truss elements, Euler-Bernoulli beam elements, and Timoshenko beam elements. It further supports the introduction of global accelerations such as gravity and truss buckling analysis. A variety of input methods are supported, these are specifically tailored towards simplifying the integration of the FE simulation environment in numerical optimization schemes. The code distinguishes itself through its fast simulation speeds even for large beam and truss structures in both 2D and 3D. With this environment, researchers and design practitioners can easily simulate the mechanical response of complex bar structures without the need for interfacing with commercial FE software through cumbersome APIs.
 
-#### Project Layout
+## Project Layout
 
 - `lib/elements`: contains beam and truss element implementations and solvers
 - `lib/general`: contains helper functions for simulation and input
@@ -17,25 +17,25 @@ This work provides a linear truss and beam FE simulation environment written in 
 - `FEM_toolkit_examples.m`: file to run the examples provided
 - `config.m`: file to configure the MATLAB path to include the toolbox
 
-#### Requirements
+## Requirements
 
 Matlab 2020b or higher is required.
 
 The additional package requirements for the beam calculations are:
 - `MATLAB Parallel Computing Toolbox`
 
-#### Installation
+## Installation
 
 To run the toolbox, it only needs to be added to the MATLAB path. A configuration script `config.m` is provided to automate this step. This config script has three options as shown in `FEM_toolkit_examples.m`. 
 - `permanent`: permanently adds the current toolbox location to the MATLAB path.
 - `temp`: adds the current toolbox location to the MATLAB path until restart.
 - `pass`: do nothing, user must manually add the toolbox to the MATLAB path.
 
-#### Examples
+## Examples
 
 To run the provided examples, just run the provided MATLAB script `FEM_toolkit_examples.m`.
 
-#### Problem User Inputs
+## Problem User Inputs
 
 | Group | Name | Size | Unit | Description|
 |----------|:----------:|:----------:|:----------:|----------|
@@ -54,7 +54,7 @@ To run the provided examples, just run the provided MATLAB script `FEM_toolkit_e
 | Options |	*Buckling* |	Boolean |	- |	Toggle if buckling evaluation shall be performed. Only supported for truss structures. |
 | Options |	*Shape* |	- |	- |	Cross-sectional shape of the elements. Only ‘circle’ supported. Only needed if buckling is active. |
 
-#### Boundary Conditions and Loads
+## Boundary Conditions and Loads
 
 - **Trusses:**
   - **C (2D):** [id X Y]
@@ -68,7 +68,7 @@ To run the provided examples, just run the provided MATLAB script `FEM_toolkit_e
   - **F (3D):** [id type X Y Z mag]
   - **type:** 1: force, 2: moment, 3: displacement, 4: rotation
 
-#### Authors
+## Authors
 
 - Dr. Tino Stankovic 
 - Dr. Tian 'Tim' Chen
