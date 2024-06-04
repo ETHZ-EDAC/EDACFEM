@@ -1,7 +1,9 @@
 % ©2024 ETH Zurich; D-​MAVT; Engineering Design and Computing
 function fem = performFEM(fem,opts)
-% progress report
-fprintf(['Perform FE calculation "',opts.nameProblem,'" ... '])
+if strcmp(opts.OutputMode,'verbose')
+    % progress report
+    fprintf(['Perform FE calculation "',opts.nameProblem,'" ... '])
+end
 
 % call script depending on the element type
 switch opts.slv.elemType    
@@ -11,6 +13,8 @@ switch opts.slv.elemType
         fem = runBeamFEM(fem,opts);        
 end
 
-% progress report
-fprintf('DONE\n\n')
+if strcmp(opts.OutputMode,'verbose')
+    % progress report
+    fprintf('DONE\n\n')
+end
 end

@@ -21,6 +21,6 @@ fem.DOF = fem.n*2*fem.d;
 [fem] = SolverLE_beam(fem,opts); 
 
 %% Output - postprocess elemental response
-fem = postProcessFEM_beam(fem,opts,fem.sol.u,fem.sol.F);
+fem = postProcessFEM_beam(fem,opts);
 
 end

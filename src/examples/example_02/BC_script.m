@@ -49,7 +49,7 @@ c4 = [idFixZ repmat([0 0 1 0 0 0], size(idFixZ,1), 1)];
 
 
 % ----- Assemble C
-C = [c1;c2;c3;c4];
+C = {[c1;c2;c3;c4],[c1;c2;c3;c4]};
 
 
 %% Apply loads & displacements
@@ -64,7 +64,7 @@ f2 = [id_prescribed_displacement repmat([3 0 1 0 5], size(id_prescribed_displace
 
 
 % ----- Assemble F
-F = [f1;f2];
+F = {[f1;f2],f1};
 
 
 

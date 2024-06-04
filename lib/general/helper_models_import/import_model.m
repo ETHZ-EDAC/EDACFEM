@@ -1,12 +1,16 @@
 % ©2024 ETH Zurich; D-​MAVT; Engineering Design and Computing
-function [fem,opts,time] = import_model(fo,importMethod,varargin)
+function [fem,opts,time] = import_model(fo,importMethod,switchOutputMode,varargin)
+% add switchVerbose to the opts struct
+opts.OutputMode = switchOutputMode;
+
 % progress report
-fprintf('Reading from folder: ');
-fprintf('<a href="matlab: winopen(''%s'')">%s</a>\n\n',fo,fo);
+if strcmp(opts.OutputMode,'verbose')
+    fprintf('Reading from folder: ');
+    fprintf('<a href="matlab: winopen(''%s'')">%s</a>\n\n',fo,fo);
+end
 
-% initialize time measurement
+% initialize time measurement for print
 time = measureTime([],'importModel'); 
-
 
 %% Import Model
 % import depending on method
@@ -57,6 +61,8 @@ switch importMethod
         opts = import_model_opts_simplified(fo,fem,elemType,elemSubtype);
 end
 
+% add switchVerbose to the opts struct
+opts.OutputMode = switchOutputMode;
 
 %% Feasibility Check
 [fem,opts] = checkInitProblem(fem,opts);
@@ -68,17 +74,22 @@ if strcmp(opts.slv.elemType,'beam')
 end
 
 %% Display
-% model setup time
-time = measureTime(time,'importModel','print');
+if strcmp(opts.OutputMode,'verbose')
+    % model setup time
+    time = measureTime(time,'importModel','print');
 
-% display model statistics
-fprintf('\n');
-fprintf('--------------------------\n ');
-fprintf('Model Statistics:\n')
-fprintf('\t# of Nodes:      %d\n',fem.n);
-fprintf('\t# of Members:    %d\n',fem.m);
-fprintf('\t# of Load Cases: %d\n',fem.nLC);
-fprintf('--------------------------\n ');
-fprintf('\n\n ');
+    % display model statistics
+    fprintf('\n');
+    fprintf('--------------------------\n ');
+    fprintf('Model Statistics:\n')
+    fprintf('\t# of Nodes:      %d\n',fem.n);
+    fprintf('\t# of Members:    %d\n',fem.m);
+    fprintf('\t# of Load Cases: %d\n',fem.nLC);
+    fprintf('--------------------------\n ');
+    fprintf('\n');
+else
+    % model setup time
+    time = measureTime(time,'importModel');
+end
 
 end

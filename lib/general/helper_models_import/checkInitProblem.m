@@ -56,8 +56,10 @@ for i=1:size(defaultProp,1)
         AssumedDefault = [AssumedDefault,defaultProp{i,1},', '];
     end
 end
-if ~isempty(AssumedDefault)
-    fprintf(['Default values assumed for: ',AssumedDefault(1:end-2),'\n\n']);
+if strcmp(opts.OutputMode,'verbose')
+    if ~isempty(AssumedDefault)
+        fprintf(['Default values assumed for: ',AssumedDefault(1:end-2),'\n\n']);
+    end
 end
 
 %% Problem Settings - Check size of fields
@@ -104,11 +106,13 @@ if opts.prob.selfweight
          
     % Info about g
     g=opts.prob.g;
-    switch fem.d
-        case 2
-            fprintf('Gravitation is turned on.\n\t Direction: [%.1f,%.1f] Magnitude: %.2f\n',g(1)./norm(g),g(2)./norm(g),norm(g));
-        case 3
-            fprintf('Gravitation is turned on.\n\t Direction: [%.1f,%.1f,%.1f] Magnitude: %.2f\n',g(1)./norm(g),g(2)./norm(g),g(3)./norm(g),norm(g));
+    if strcmp(opts.OutputMode,'verbose')
+        switch fem.d
+            case 2
+                fprintf('Gravitation is turned on.\n\t Direction: [%.1f,%.1f] Magnitude: %.2f\n',g(1)./norm(g),g(2)./norm(g),norm(g));
+            case 3
+                fprintf('Gravitation is turned on.\n\t Direction: [%.1f,%.1f,%.1f] Magnitude: %.2f\n',g(1)./norm(g),g(2)./norm(g),g(3)./norm(g),norm(g));
+        end
     end
 
 end 

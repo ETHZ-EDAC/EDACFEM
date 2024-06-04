@@ -6,8 +6,10 @@ function [fem,opts] = setParamsBeamFEM(fem,opts)
 if ~isfield(fem.el,'nu')
     % set to default
    fem.el.nu = repmat(0.3,fem.m,1);
-   % report
-   fprintf('No Poissons ratio specified. It will be set to nu=0.3 for all members.\n\n');
+   % report if verbose
+   if strcmp(opts.OutputMode,'verbose')
+    fprintf('No Poissons ratio specified. It will be set to nu=0.3 for all members.\n\n');
+   end
 end
 
 

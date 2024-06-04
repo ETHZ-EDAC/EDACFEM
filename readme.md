@@ -41,8 +41,8 @@ To run the provided examples, just run the provided MATLAB script `FEM_toolkit_e
 |----------|:----------:|:----------:|:----------:|----------|
 | Geometry |	**p** |	[n x 2] <br/> [n x 3] |	mm |	Nodal coordinates of *n* nodes in 2D or 3D. |
 | Geometry |	**b** |	[m x 2] |	- |	List of m pairs of node IDs connected by elements. |
-| Load / Boundary |	**F**	| [i x 6] |	N <br/> Nmm <br/> mm <br/> rad |	List of *i* prescribed loads/moments/displacements/rotations in the form [ID type X Y Z mag]. See additional information in the section below for specifics.|
-| Load / Boundary |	**C** |	[j x DOF] |	- |	List of *j* restricted displacements where DOF is the number of possible displacements and rotations dependent on the element and problem setting. For each DOF, the DOF can be fixed with an entry of 1. |
+| Load / Boundary |	**F**	| [i x 6] <br/> {F_1,F_2}|	N <br/> Nmm <br/> mm <br/> rad |	List of *i* prescribed loads/moments/displacements/rotations in the form [ID type X Y Z mag]. See additional information in the section below for specifics. <br/> Mutliple load cases can be submitted at the same time, to do so add one list per load case to a cell array called F during boundary condition initialization.|
+| Load / Boundary |	**C** |	[j x DOF] <br/> {C_1,C_2} |	- |	List of *j* restricted displacements where DOF is the number of possible displacements and rotations dependent on the element and problem setting. For each DOF, the DOF can be fixed with an entry of 1. <br/> Mutliple load cases can be submitted at the same time, to do so add one list per load case to a cell array called C during boundary condition initialization.|
 | Element Properties | *E* |	1 or m |	MPa |	Elastic modulus for all elements or each individual element. |
 | Element Properties |	*A* |	1 or m |	mm<sup>2</sup> |	Cross-sectional area for all elements or each individual element. |
 | Element Properties |	*ρ* |	1 or m |	t/mm<sup>3</sup> |	Density for all elements or each individual element. Only further used if selfweight is active. |

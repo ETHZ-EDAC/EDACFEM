@@ -7,7 +7,7 @@ if ~isempty(time)
 end
 
 if isfield(time,string)
-    error('Attempted to measure time which was allready stopped: %s!',string);
+    error('Attempted to measure time which was already stopped: %s!',string);
 end
 
 if ~isfield(time,'started') || ~isfield(time.started,string)
