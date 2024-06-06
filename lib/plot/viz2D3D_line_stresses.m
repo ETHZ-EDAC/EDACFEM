@@ -208,7 +208,7 @@ for iLC = 1:size(LC,2)
                 colorId = 1;
             elseif eS(k)>limits(1)
                 colorId = 7;
-            elseif eS(k)<limits(8)
+            elseif eS(k)<=limits(8)
                 colorId = 1;
             end
             set(harray(k,1),'Color',varColors(colorId,:));

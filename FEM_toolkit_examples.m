@@ -35,7 +35,7 @@ nameProblem = 'example_02';
 fo = [cd,strcat(filesep,'src',filesep,'examples',filesep),nameProblem]; 
 
 switch_importMethod = 'script_simplified'; %'script_full', 'script_simplified', 'pbFC'
-switch_outputMode = 'verbose'; %'verbose', 'silent'
+switch_outputMode = 'silent'; %'verbose', 'silent'
 [fem_ex02,opts_ex02,time_ex02] = import_model(fo,switch_importMethod,switch_outputMode);
 
 
@@ -52,7 +52,7 @@ fo = [cd,strcat(filesep,'src',filesep,'examples',filesep),nameProblem];
 pbFC = load('pbFC_example03').pbFC_example03;
 
 switch_importMethod = 'pbFC'; %'script_full', 'script_simplified', 'pbFC'
-switch_outputMode = 'verbose'; %'verbose', 'silent'
+switch_outputMode = 'silent'; %'verbose', 'silent'
 [fem_ex03,opts_ex03,time_ex03] = import_model(fo,switch_importMethod,switch_outputMode,pbFC);
 
 
@@ -67,7 +67,7 @@ fem_ex02 = performFEM(fem_ex02,opts_ex02);
 LC = [1,2]; %Choose the appropriate load case
 viz2D3D_line_deformed(fem_ex02,opts_ex02,LC,'Mag'); %'Mag', 'U1', 'U2', 'U3'
 viz2D3D_line_stresses(fem_ex02,opts_ex02,LC); 
- 
+
 fem_ex03 = performFEM(fem_ex03,opts_ex03);
 LC = 1; %Choose the appropriate load case or load cases
 viz2D3D_line_deformed(fem_ex03,opts_ex03,LC,'Mag'); %'Mag', 'U1', 'U2', 'U3'
