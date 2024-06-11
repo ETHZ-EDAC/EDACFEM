@@ -46,6 +46,4 @@ K21(3,5) = -K21(5,3);
 % assemble
 Ke = [K11, K21'; K21, K22];
 
-% disp(Ke);
-
 end

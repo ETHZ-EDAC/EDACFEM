@@ -1,9 +1,39 @@
 % ©2024 ETH Zurich; D-​MAVT; Engineering Design and Computing
 function [Kg,Tg] = Kg_chunkB(p,b,E,A,Iyy,Izz,G,J,L,m,n,m_begin,beamType)
 
-% initialize
-Kg = sparse(m,n);
-Tg = sparse(m,n);
+KgOld = sparse(m,n);
+
+% Kg and Tg will be built as sparse matrices using the regular sparse
+% matrix initialization.
+% To do this, three vectors need to be built. For each nonzero in the final
+% matrices, there is one entry in each of the three vectors. The first
+% vector holds the row index, the second one the column index and the third
+% one the value.
+% The sparse initialization automatically carries out the addition.
+
+% we first estimate the maximum number of entries. Per element, there are a
+% maximum of 144 nonzeros.
+
+numEls = size(b,1);
+numNonZerosMax = numEls*144;
+
+% prepare vectors for the indices 
+rowVec = zeros(numNonZerosMax,1);
+colVec = zeros(numNonZerosMax,1);
+valVec = zeros(numNonZerosMax,1); % name of this vector sounds almost like a good red wine
+
+% we need a counter to keep track of the extent to which the vectors are
+% filled.
+
+ctr = 1;
+
+% set up a parallel structure for T. There, we add a maximum of 72 nonzeros
+% per element
+numNonzerosMaxTG = numEls*72;
+rowVecTG = zeros(numNonzerosMaxTG,1);
+colVecTG = zeros(numNonzerosMaxTG,1);
+valVecTG = zeros(numNonzerosMaxTG,1);
+ctrTG = 1;
 
 % iterate for each bar
 for i = 1:size(b,1)
@@ -41,24 +71,101 @@ for i = 1:size(b,1)
 
     % Assemble global stiffness and transformation matrices
     if n1>=1&&n1<m
-        Kg(n1:n1+5,6*p1-5:6*p1)=Kg(n1:n1+5,6*p1-5:6*p1)+Ke(1:6,1:6);
-        Tg(n1:n1+5,6*p1-5:6*p1)=T(1:6,1:6); 
+        % adds 36 entries to Kg and Tg
+        % old implementation, for reference
+%         KgOld(n1:n1+5,6*p1-5:6*p1)=KgOld(n1:n1+5,6*p1-5:6*p1)+Ke(1:6,1:6);
+%         Tg(n1:n1+5,6*p1-5:6*p1)=T(1:6,1:6);
+
+        % create vectors holding the rows and columns
+        % ...and then flatten them into our vectors where we gather
+        % everything.
+        [rows,cols] = meshgrid(n1:n1+5,6*p1-5:6*p1);
+        vals = Ke(1:6,1:6);
+        rowVec(ctr:ctr+35) = reshape(rows',1,[])';
+        colVec(ctr:ctr+35) = reshape(cols',1,[])';
+        valVec(ctr:ctr+35) = vals(:);
+        % don't forget to update the counter
+        ctr = ctr+36; % we advanced by 36 entries
+        
+        % same story for TG
+        valsTG = T(1:6,1:6);
+        rowVecTG(ctrTG:ctrTG+35) = reshape(rows',1,[])';
+        colVecTG(ctrTG:ctrTG+35) = reshape(cols',1,[])';
+        valVecTG(ctrTG:ctrTG+35) = valsTG(:);
+        ctrTG = ctrTG+36;
     end
 
     if n1>=1&&n1<m
-        Kg(n1:n1+5,6*p2-5:6*p2)=Kg(n1:n1+5,6*p2-5:6*p2)+Ke(1:6,7:12); 
+        % adds 36 entries to Kg
+        % for reference: old implementation
+%         KgOld(n1:n1+5,6*p2-5:6*p2)=KgOld(n1:n1+5,6*p2-5:6*p2)+Ke(1:6,7:12); 
+        
+        % same story. Build matrices with rows and column index, as well as
+        % values.
+        [rows, cols] = meshgrid(n1:n1+5,6*p2-5:6*p2);
+        vals = Ke(1:6,7:12);
+        rowVec(ctr:ctr+35) = reshape(rows',1,[])';
+        colVec(ctr:ctr+35) = reshape(cols',1,[])';
+        valVec(ctr:ctr+35) = vals(:);
+        
+        % don't forget to update the counter...
+        ctr = ctr+36;
     end
 
     if n2>=1&&n2<m
-        Kg(n2:n2+5,6*p1-5:6*p1)=Kg(n2:n2+5,6*p1-5:6*p1)+Ke(7:12,1:6); 
+        % adds 36 entries to Kg
+        % for reference: old implementation
+%         KgOld(n2:n2+5,6*p1-5:6*p1)=KgOld(n2:n2+5,6*p1-5:6*p1)+Ke(7:12,1:6); 
+        
+        % same old story
+        [rows,cols] = meshgrid(n2:n2+5,6*p1-5:6*p1);
+        vals = Ke(7:12,1:6);
+        rowVec(ctr:ctr+35) = reshape(rows',1,[])';
+        colVec(ctr:ctr+35) = reshape(cols',1,[])';
+        valVec(ctr:ctr+35) = vals(:);
+        
+        %...and update the counter
+        ctr = ctr+36;
     end
 
     if n2>=1&&n2<m
-        Kg(n2:n2+5,6*p2-5:6*p2)=Kg(n2:n2+5,6*p2-5:6*p2)+Ke(7:12,7:12);
-        Tg(n2:n2+5,6*p2-5:6*p2)=T(7:12,7:12); 
+        % adds 36 entries to Kg and Tg
+        % for reference: old implementation
+%         KgOld(n2:n2+5,6*p2-5:6*p2)=KgOld(n2:n2+5,6*p2-5:6*p2)+Ke(7:12,7:12);
+        % Tg(n2:n2+5,6*p2-5:6*p2)=T(7:12,7:12);
+        
+        % ...and a last time...
+        [rows,cols] = meshgrid(n2:n2+5,6*p2-5:6*p2);
+        vals = Ke(7:12,7:12);
+        rowVec(ctr:ctr+35) = reshape(rows',1,[])';
+        colVec(ctr:ctr+35) = reshape(cols',1,[])';
+        valVec(ctr:ctr+35) = vals(:);
+        
+        % and again, don't forget the counter
+        ctr = ctr+36;
+        
+        % same story for Tg
+        valsTG = T(7:12,7:12);
+        rowVecTG(ctrTG:ctrTG+35) = reshape(rows',1,[])';
+        colVecTG(ctrTG:ctrTG+35) = reshape(cols',1,[])';
+        valVecTG(ctrTG:ctrTG+35) = valsTG(:);
+        
+        ctrTG = ctrTG+36;
     end
 
 end
+
+% trim off the end where we did not fill in any nonzeros
+rowVec = rowVec(1:ctr-1);
+colVec = colVec(1:ctr-1);
+valVec = valVec(1:ctr-1);
+rowVecTG = rowVecTG(1:ctrTG-1);
+colVecTG = colVecTG(1:ctrTG-1);
+valVecTG = valVecTG(1:ctrTG-1);
+
+% and build the big thing at once...
+Kg = sparse(rowVec,colVec,valVec,m,n);
+Tg = sparse(rowVecTG,colVecTG,valVecTG,m,n);
 
 end
 

@@ -142,7 +142,7 @@ for iLC = 1:size(LC,2)
     
     %% Plot Displacements
     % Rounding for labels
-    rd=2;                   % rounding digits for chart display
+    rd=4;                   % rounding digits for chart display
     
     %Displacement outputs to console
     fprintf(['Max displacement: %3.', num2str(rd) ,'f mm \n'],maxDisp);

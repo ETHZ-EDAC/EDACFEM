@@ -22,6 +22,7 @@ function [T] = Transf_B_Round(n1,n2,L)
     end
 
     % Make transformation matrix
-    T=blkdiag(T,T,T,T);
+    zrs=zeros(3);
+    T=[T,zrs,zrs,zrs;zrs,T,zrs,zrs;zrs,zrs,T,zrs;zrs,zrs,zrs,T];
     T=sparse(T);
 end

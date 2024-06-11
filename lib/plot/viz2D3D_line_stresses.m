@@ -128,7 +128,7 @@ for iLC = 1:size(LC,2)
     flagStresses = 1;       % shows stresses as colors
     flagNormalized = 0;     % normalizes streses
     flagLimitsManual = 0;   % limits can be typed manually
-    rd=2;                   % rounding digits for chart display
+    rd=4;                   % rounding digits for chart display
     
     %Stress Setup
     max_axis = round(max(eS),rd);

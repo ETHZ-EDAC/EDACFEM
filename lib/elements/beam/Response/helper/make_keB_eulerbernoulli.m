@@ -66,5 +66,4 @@ function [Ke] = make_keB_eulerbernoulli(E,A,Iy,Iz,G,J,L)
     Ke(12,8)=-a;
     Ke(8,12)=-a;
     
-    % disp(Ke);
 end
