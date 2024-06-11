@@ -1,8 +1,6 @@
 % ©2024 ETH Zurich; D-​MAVT; Engineering Design and Computing
 function [Kg,Tg] = Kg_chunkB(p,b,E,A,Iyy,Izz,G,J,L,m,n,m_begin,beamType)
 
-KgOld = sparse(m,n);
-
 % Kg and Tg will be built as sparse matrices using the regular sparse
 % matrix initialization.
 % To do this, three vectors need to be built. For each nonzero in the final
