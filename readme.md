@@ -68,6 +68,31 @@ To run the provided examples, just run the provided MATLAB script `FEM_toolkit_e
   - **F (3D):** [id type X Y Z mag]
   - **type:** 1: force, 2: moment, 3: displacement, 4: rotation
 
+## Truss Outputs
+
+| Group | Name | Size | Unit | Description|
+|----------|:----------:|:----------:|:----------:|----------|
+| Force |	**F** |	[n x 2] <br/> [n x 3] |	N |	Global Nodal Forces |
+| Displacement |	**u** |	[n x 2] <br/> [n x 3] |	mm |	Global Nodal Displacements |
+| Force |	**N** |	[m x 1] |	N |	Axial Force |
+| Stress | **S** |	[m x 1] |	MPa |	Axial Stress |
+| Strain |	*A* |	[m x 1] |	- |	Axial Strain |
+| Length |	*ρ* |	[m x 1] |	mm |	Axial Length Delta |
+
+## Beam Outputs
+
+| Group | Name | Size | Unit | Description|
+|----------|:----------:|:----------:|:----------:|----------|
+| Force <br/> Moment |	**F** |	[n x 6] |	N <br/> Nmm |	Global Nodal Forces / Moments |
+| Displacement <br/> Rotation|	**u** |	[n x 6] |	mm <br/> rad |	Global Nodal Displacements / Rotation |
+| Force |	**N** |	[m x 1] |	N |	Axial Force |
+| Force |	**Qy** / **Qz** |	[m x 1] |	N |	Lateral Forces |
+| Moment |	**Tt** |	[m x 1] |	Nmm |	Torsional Moment |
+| Moment |	**Mymax** <br/> **Mzmax** |	[m x 1] |	Nmm |	Maximum Bending Moments |
+| Stress | **Sx** / **Sy** / **Sz** |	[m x 1] |	MPa |	Axial / Shear Stress |
+| Stress | **S1eq** / **S2eq** <br/> **Teq** |	[m x 1] |	MPa <br/> Nmm |	Equivalent Stresses / Moment |
+| Stress | **Smises** |	[m x 1] |	MPa |	Von Mises Stress |
+
 ## Authors
 
 - Dr. Tino Stankovic 
