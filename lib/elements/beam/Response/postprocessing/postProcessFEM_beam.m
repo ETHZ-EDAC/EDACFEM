@@ -42,6 +42,10 @@ for iLC = 1:fem.nLC
     fem.sol{iLC}.S2eq = rprt(:,11);
     fem.sol{iLC}.Teq = rprt(:,12);
     fem.sol{iLC}.Smises = rprt(:,13);
+
+    % Reshape u and F
+    fem.sol{iLC}.F = reshape(fem.sol{iLC}.F,[6,fem.n])';
+    fem.sol{iLC}.u = reshape(fem.sol{iLC}.u,[6,fem.n])';
 end
 end
 

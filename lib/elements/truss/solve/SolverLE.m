@@ -74,6 +74,10 @@ function [fem] = postProcessFEM(fem,opts)
         
         % Displacement
         fem.sol{iLC}.eDelta  = fem.sol{iLC}.eEpsilon.*fem.el.eL;
+
+        % Reshape u and F
+        fem.sol{iLC}.F = reshape(fem.sol{iLC}.F,[fem.d,fem.n])';
+        fem.sol{iLC}.u = reshape(fem.sol{iLC}.u,[fem.d,fem.n])';
     end
 end
 

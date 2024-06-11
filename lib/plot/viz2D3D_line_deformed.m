@@ -92,11 +92,11 @@ for iLC = 1:size(LC,2)
         p1 =  p(b(i,1), 1:d);
         p2 =  p(b(i,2), 1:d);
         if strcmp(opts.slv.elemType,'truss')
-            dp1 = U(b(i,1)*d-d+1:b(i,1)*d).';
-            dp2 = U(b(i,2)*d-d+1:b(i,2)*d).';
+            dp1 = U(b(i,1),:);
+            dp2 = U(b(i,2),:);
         elseif strcmp(opts.slv.elemType,'beam')
-            dp1 = U(b(i,1)*6-5:b(i,1)*6-3).';
-            dp2 = U(b(i,2)*6-5:b(i,2)*6-3).';
+            dp1 = U(b(i,1),1:3);
+            dp2 = U(b(i,2),1:3);
         end
     
         switch dispType
