@@ -43,9 +43,9 @@ function [val] = Local_Beam(p,b,E,A,Iy,Iz,G,J,L,U,opts)
           Tyz=abs(4*Qy/(3*pi*(D/2)^2));
           
           %Equivalent stress calculation ***************************
-          S1_eq=abs(Sx)+Sy;
-          S2_eq=abs(Sx)+Sz;
-          T_eq=Tt+Tzy+Tyz;
+          S1eq=abs(Sx)+Sy;
+          S2eq=abs(Sx)+Sz;
+          Teq=Tt+Tzy+Tyz;
           
           %von Mises stress calculation ***************************
           a_zy = -Tzy/(D/2)^2;
@@ -71,6 +71,6 @@ function [val] = Local_Beam(p,b,E,A,Iy,Iz,G,J,L,U,opts)
           
           % ********************************************************
           %[axial force(N), Lateral forces (Qy, Qz), Torsion(Tt), Bending Moments(Mymax Mzmax), von Misses(S_ekv)]
-          val(i,:)=[N(2) Qy Qz Tt Mymax Mzmax Sx Sy Sz S1_eq S2_eq T_eq S_mises u']; %Output
+          val(i,:)=[N(2) Qy Qz Tt Mymax Mzmax Sx Sy Sz S1eq S2eq Teq S_mises u']; %Output
     end
 end

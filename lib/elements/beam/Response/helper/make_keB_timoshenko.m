@@ -19,8 +19,6 @@ Pz = 12*E*Iy/(G*Az*L^2);
 
 
 %% Assemble stiffness matrix
-% template
-Ke = sparse(12,12);
 
 % template for partition
 K11 = zeros(6,6);
@@ -48,6 +46,6 @@ K21(3,5) = -K21(5,3);
 % assemble
 Ke = [K11, K21'; K21, K22];
 
-disp(Ke);
+% disp(Ke);
 
 end

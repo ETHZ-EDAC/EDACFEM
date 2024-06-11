@@ -3,7 +3,7 @@ function [Kg,Tg] = assemKm_beam(fem,opts)
 
 %% Initialize
 % retrieve variables
-DOF = fem.DOF;
+% DOF = fem.DOF;
 noWorkers = opts.slv.noWorkers;
 p = fem.p;
 b = fem.b;

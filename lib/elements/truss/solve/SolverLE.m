@@ -51,19 +51,19 @@ end
 function [fem] = postProcessFEM(fem,opts)
     for iLC = 1:fem.nLC
         % Member forces
-        fem.sol{iLC}.q  = -fem.el.eE.*fem.el.eA./fem.el.eL.*fem.truss.A'*fem.sol{iLC}.u; 
+        fem.sol{iLC}.N  = -fem.el.eE.*fem.el.eA./fem.el.eL.*fem.truss.A'*fem.sol{iLC}.u; 
         
         % Member stress
-        fem.sol{iLC}.S  = fem.sol{iLC}.q ./ fem.el.eA;
+        fem.sol{iLC}.S  = fem.sol{iLC}.N ./ fem.el.eA;
         
         % Critical Load - Euler Buckling
         if isfield(opts,'prob') && isfield(opts.prob,'buckling') && opts.prob.buckling
             switch opts.prob.shape
                 case 'circle'
                     % critical euler load
-                    fem.sol{iLC}.qbu  = pi * fem.el.eE .* fem.el.eA.^2 ./ (4*fem.el.eL.^2);
+                    fem.sol{iLC}.Nbu  = pi * fem.el.eE .* fem.el.eA.^2 ./ (4*fem.el.eL.^2);
                     % buckling indicator (1: intact / 0: buckled)
-                    fem.sol{iLC}.idbu = fem.sol{iLC}.q  < fem.sol{iLC}.qbu;
+                    fem.sol{iLC}.idbu = fem.sol{iLC}.N  < fem.sol{iLC}.Nbu;
                 otherwise
                     warning(['Buckling for cross section shape "',opts.prob.shape,'" not implemented.'])
             end

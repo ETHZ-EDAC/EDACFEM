@@ -38,9 +38,9 @@ for iLC = 1:fem.nLC
     fem.sol{iLC}.Sx = rprt(:,7);
     fem.sol{iLC}.Sy = rprt(:,8);
     fem.sol{iLC}.Sz = rprt(:,9);
-    fem.sol{iLC}.S1_eq = rprt(:,10);
-    fem.sol{iLC}.S2_eq = rprt(:,11);
-    fem.sol{iLC}.T_eq = rprt(:,12);
+    fem.sol{iLC}.S1eq = rprt(:,10);
+    fem.sol{iLC}.S2eq = rprt(:,11);
+    fem.sol{iLC}.Teq = rprt(:,12);
     fem.sol{iLC}.Smises = rprt(:,13);
 end
 end
