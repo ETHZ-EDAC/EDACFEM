@@ -15,9 +15,10 @@ switch_outputMode = 'silent';
 
 %% Optimization Set-Up
 % Variables ***************************************************************
-DLB=.0001;                                                          % Bar diameter - lower bound per direction
-DUB= 2.0;                                                           % Bar diameter - upper bound per direction
-LB(1:6,1) = DLB^2*pi/4;                                             % Bar cross-section sizes - lower bound
+DLB0 =.0001;                                                        % Bar diameter - lower bound per direction
+DLB = 0.5;                                                          % Bar diameter - lower bound per direction for real structure
+DUB = 2.0;                                                          % Bar diameter - upper bound per direction
+LB(1:6,1) = DLB0^2*pi/4;                                            % Bar cross-section sizes - lower bound
 UB(1:6,1) = DUB^2*pi/4;                                             % Bar cross-section sizes - upper bound
 
 % Design variable linking based on the position of bars *******************
@@ -41,7 +42,7 @@ V=@(x)A_var(x)'*L;                                                  %Objective f
 
 % Constraints *************************************************************
 vmLimit=100; %vMises limit in MPa
-Constr=@(x)example04_constraintFunction(A_var(x),fem_ex04,opts_ex04,vmLimit,DUB);
+Constr=@(x)example04_constraintFunction(A_var(x),fem_ex04,opts_ex04,vmLimit,DLB,DUB);
 
 %% Optimization FMINCON using IPOPT
 options = optimoptions(@fmincon,...                                 %Optimization options
@@ -78,5 +79,7 @@ g_vMises=c(1:nLoadCases*m);
 g_Buckling=c(nLoadCases*m+1:nLoadCases*2*m);
 g_MaxGauge=c(nLoadCases*2*m+1:nLoadCases*2*m+m);
 g_MaxGauge=repmat(g_MaxGauge,nLoadCases,1);
+g_MinGauge=c(nLoadCases*2*m+m+1:nLoadCases*2*m+2*m);
+g_MinGauge=repmat(g_MinGauge,nLoadCases,1);
 LC=repelem((1:nLoadCases),m)';
-ResTab=table(Bar,A_star,D_star,LC, g_vMises,g_Buckling,g_MaxGauge); %Results table
+ResTab=table(Bar,A_star,D_star,LC, g_vMises,g_Buckling,g_MaxGauge,g_MinGauge); %Results table

@@ -1,5 +1,5 @@
 % ©2024 ETH Zurich; D-​MAVT; Engineering Design and Computing
-function [c,ceq] = example04_constraintFunction(x,fem,opts,SY,DUB)
+function [c,ceq] = example04_constraintFunction(x,fem,opts,SY,DLB,DUB)
     %% Response calculation
     fem.el.eA=x;                                        %Update cross-sections A
     [fem,opts] = setParamsBeamFEM(fem,opts);            %Update moments of inertia
@@ -32,8 +32,9 @@ function [c,ceq] = example04_constraintFunction(x,fem,opts,SY,DUB)
     c1 = Stress-SY*ones(nLoadCases*m,1);                % Inequality constraints - vMises, <=0
     c2 = -Stress_Axial-repmat(Crit_Buck,nLoadCases,1);  % Inequality constraints - Buckling, <=0
     c3 = (x*4/pi).^0.5-DUB*ones(m,1);                   % Inequality constraints - max gauge <=0
+    c4 = -(x*4/pi).^0.5+DLB*ones(m,1);                  % Inequality constraints - min gauge <=0
 
     %% Output
-    c = [c1;c2;c3];                                     % Inequality constraints;
+    c = [c1;c2;c3;c4];                                     % Inequality constraints;
     ceq=[];                                             % Equality constraints;
 end
