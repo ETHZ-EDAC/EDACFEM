@@ -36,6 +36,7 @@ To run the toolbox, it only needs to be added to the MATLAB path. A configuratio
 To run the provided examples, just run the provided MATLAB script `FEM_toolkit_examples.m`.
 
 ## Problem User Inputs
+Three different methods are currently implemented to supply the input parameters. The import method *script_full* is shown in *example_0* using trusses, the import method *script_simplified* is shown in *example_02* using Timoshenko beams, and the import method *pbFC* is shown in *example_03* using Euler-Bernoulli beams. All three examples can be run from the main directory using the `FEM_toolkit_examples.m` file.
 
 | Group | Name | Size | Unit | Description|
 |----------|:----------:|:----------:|:----------:|----------|
